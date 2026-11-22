@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0e2d42">
+<title>شاهد الفيديو · عالمٌ تحت البحر</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>body{font-family:"Baloo Bhaijaan 2",Fredoka,system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}</style>
+</head>
+<body>
+<div class="band" aria-hidden="true"></div>
+<div class="wrap">
+<div class="top"><a class="backbtn" href="./"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>القائمة</a><span class="ttl">عالمٌ تحت البحر</span></div>
+<section>
+  <video id="vid" controls playsinline preload="metadata" poster="poster.jpg">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+  <p class="vfail" id="vfail">تعذّر تحميل الفيديو. يرجى التحقق من الاتصال والمحاولة مرة أخرى.</p>
+</section>
+</div>
+<script>document.getElementById('vid').addEventListener('error',function(){document.getElementById('vfail').style.display='block'},true);</script>
+<div class="band bottom" aria-hidden="true"></div>
+</body></html>

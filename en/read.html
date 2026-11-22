@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0e2d42">
+<title>Read the Book · World Under the Sea</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>body{font-family:"Fredoka",Fredoka,system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}</style>
+</head>
+<body>
+<div class="band" aria-hidden="true"></div>
+<div class="wrap">
+<div class="top"><a class="backbtn" href="./"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Menu</a><span class="ttl">World Under the Sea</span></div>
+<section>
+  <div class="strip" id="strip" tabindex="0" aria-label="Read the Book">
+<div class="pg" data-i="1"><img src="pages/p-01.jpg" alt="Page 1" loading="eager" width="935" height="1210"></div>
+<div class="pg" data-i="2"><img src="pages/p-02.jpg" alt="Page 2" loading="eager" width="935" height="1210"></div>
+<div class="pg" data-i="3"><img src="pages/p-03.jpg" alt="Page 3" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="4"><img src="pages/p-04.jpg" alt="Page 4" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="5"><img src="pages/p-05.jpg" alt="Page 5" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="6"><img src="pages/p-06.jpg" alt="Page 6" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="7"><img src="pages/p-07.jpg" alt="Page 7" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="8"><img src="pages/p-08.jpg" alt="Page 8" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="9"><img src="pages/p-09.jpg" alt="Page 9" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="10"><img src="pages/p-10.jpg" alt="Page 10" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="11"><img src="pages/p-11.jpg" alt="Page 11" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="12"><img src="pages/p-12.jpg" alt="Page 12" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="13"><img src="pages/p-13.jpg" alt="Page 13" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="14"><img src="pages/p-14.jpg" alt="Page 14" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="15"><img src="pages/p-15.jpg" alt="Page 15" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="16"><img src="pages/p-16.jpg" alt="Page 16" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="17"><img src="pages/p-17.jpg" alt="Page 17" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="18"><img src="pages/p-18.jpg" alt="Page 18" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="19"><img src="pages/p-19.jpg" alt="Page 19" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="20"><img src="pages/p-20.jpg" alt="Page 20" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="21"><img src="pages/p-21.jpg" alt="Page 21" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="22"><img src="pages/p-22.jpg" alt="Page 22" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="23"><img src="pages/p-23.jpg" alt="Page 23" loading="lazy" width="935" height="1210"></div>
+<div class="pg" data-i="24"><img src="pages/p-24.jpg" alt="Page 24" loading="lazy" width="935" height="1210"></div>
+  </div>
+  <div class="ctrl">
+    <button class="btn" id="prev" aria-label="Previous page"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <span class="count">Page <span id="cur">1</span> of 24</span>
+    <button class="btn" id="next" aria-label="Next page"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+  <p class="hint">Swipe or use the arrows to turn the pages.</p>
+  <a class="pdf" href="book.pdf" target="_blank" rel="noopener">Open the PDF</a>
+</section>
+</div>
+<script>
+(function(){
+  var strip=document.getElementById('strip'),pgs=[].slice.call(strip.querySelectorAll('.pg')),cur=document.getElementById('cur'),
+      prev=document.getElementById('prev'),next=document.getElementById('next'),i=0;
+  function upd(){cur.textContent=i+1;prev.disabled=i<=0;next.disabled=i>=pgs.length-1;}
+  function go(n){n=Math.max(0,Math.min(pgs.length-1,n));var s=strip.getBoundingClientRect(),r=pgs[n].getBoundingClientRect();
+    strip.scrollBy({left:r.left-s.left,behavior:'smooth'});i=n;upd();}
+  prev.onclick=function(){go(i-1)};next.onclick=function(){go(i+1)};
+  strip.addEventListener('keydown',function(e){var rtl=document.dir==='rtl';
+    if(e.key==='ArrowRight'){e.preventDefault();go(rtl?i-1:i+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(rtl?i+1:i-1)}});
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.intersectionRatio>0.6){i=+x.target.dataset.i-1;upd();}})},{root:strip,threshold:[0.6]});
+    pgs.forEach(function(p){io.observe(p)});}
+  upd();
+})();
+</script>
+<div class="band bottom" aria-hidden="true"></div>
+</body></html>
